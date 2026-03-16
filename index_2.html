@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFT | Cross-Border Finance</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1F3C; --navy-mid: #1A3357; --gold: #C9A84C; --gold-light: #E8C97A;
+    --cream: #F8F5EF; --text: #1A1A1A; --text-mid: #4A4A4A; --border: rgba(201,168,76,0.25);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,31,60,0.97); backdrop-filter: blur(8px); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 18px; letter-spacing: 0.04em; text-decoration: none; }
+  .nav-logo span { color: rgba(255,255,255,0.6); font-size: 14px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; letter-spacing: 0.08em; }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 24px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: all 0.2s; text-decoration: none; }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+  .hero { min-height: 100vh; background: var(--navy); display: flex; align-items: center; padding: 120px 48px 80px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(135deg, transparent 0%, rgba(201,168,76,0.06) 100%); }
+  .hero-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); opacity: 0.2; }
+  .hero-content { max-width: 720px; position: relative; z-index: 2; }
+  .hero-tag { display: inline-block; border: 1px solid var(--gold); color: var(--gold); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 6px 16px; margin-bottom: 32px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 64px); color: #fff; line-height: 1.15; margin-bottom: 24px; font-weight: 400; }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 520px; margin-bottom: 48px; font-weight: 300; line-height: 1.7; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary { background: var(--gold); color: var(--navy); border: none; padding: 14px 36px; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-secondary { background: transparent; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.3); padding: 14px 36px; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: all 0.2s; text-decoration: none; display: inline-block; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.7); color: #fff; }
+  .stats-bar { background: var(--navy-mid); padding: 32px 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border-top: 1px solid var(--border); }
+  .stat-item { padding: 16px 32px; text-align: center; border-right: 1px solid rgba(255,255,255,0.08); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  section { padding: 96px 48px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3vw, 42px); color: var(--text); font-weight: 400; margin-bottom: 16px; line-height: 1.2; }
+  .section-title.light { color: #fff; }
+  .section-sub { font-size: 16px; color: var(--text-mid); max-width: 560px; margin-bottom: 56px; font-weight: 300; }
+  .section-sub.light { color: rgba(255,255,255,0.6); }
+  .services-bg { background: var(--cream); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .service-card { background: #fff; padding: 40px 36px; transition: background 0.2s; }
+  .service-card:hover { background: var(--navy); }
+  .service-card:hover .service-title { color: #fff; }
+  .service-card:hover .service-text { color: rgba(255,255,255,0.6); }
+  .service-card:hover .service-num { color: rgba(255,255,255,0.15); }
+  .service-num { font-family: 'Playfair Display', serif; font-size: 48px; color: rgba(0,0,0,0.06); line-height: 1; margin-bottom: 20px; transition: color 0.2s; }
+  .service-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 12px; font-weight: 400; transition: color 0.2s; }
+  .service-text { font-size: 14px; color: var(--text-mid); line-height: 1.7; font-weight: 300; transition: color 0.2s; }
+  .why-bg { background: var(--navy); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .why-list { list-style: none; }
+  .why-list li { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; gap: 20px; align-items: flex-start; }
+  .why-icon { width: 32px; height: 32px; border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .why-icon svg { width: 14px; height: 14px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .why-item-title { font-size: 15px; color: #fff; font-weight: 500; margin-bottom: 4px; }
+  .why-item-text { font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .why-visual { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 48px 40px; text-align: center; }
+  .why-visual-num { font-family: 'Playfair Display', serif; font-size: 80px; color: var(--gold); line-height: 1; opacity: 0.9; display: block; margin-bottom: 8px; }
+  .why-visual-label { font-size: 13px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 32px; }
+  .why-visual-line { width: 1px; height: 40px; background: var(--border); margin: 0 auto 32px; }
+  .geo-bg { background: var(--cream); }
+  .geo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .geo-card { border: 1px solid var(--border); padding: 32px 28px; background: #fff; }
+  .geo-flag { font-size: 28px; margin-bottom: 12px; display: block; }
+  .geo-name { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--navy); margin-bottom: 8px; font-weight: 400; }
+  .geo-desc { font-size: 13px; color: var(--text-mid); font-weight: 300; line-height: 1.6; }
+  .cta-bg { background: var(--navy); padding: 96px 48px; }
+  .cta-inner { max-width: 900px; margin: 0 auto; }
+  .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3vw, 44px); color: #fff; margin-bottom: 16px; font-weight: 400; text-align: center; }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 56px; font-weight: 300; text-align: center; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .form-group input, .form-group textarea { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 12px 16px; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { height: 120px; resize: vertical; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .form-submit { width: 100%; background: var(--gold); color: var(--navy); border: none; padding: 14px; font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; transition: all 0.2s; margin-top: 8px; }
+  .form-submit:hover { background: var(--gold-light); }
+  .form-success { display: none; background: rgba(201,168,76,0.1); border: 1px solid var(--gold); color: var(--gold); padding: 16px; text-align: center; font-size: 14px; margin-top: 16px; }
+  .contact-info { padding-top: 8px; }
+  .contact-info-item { padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .contact-info-item:first-child { padding-top: 0; }
+  .contact-info-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .contact-info-val { font-size: 16px; color: var(--gold); text-decoration: none; display: block; transition: color 0.2s; }
+  .contact-info-val:hover { color: var(--gold-light); }
+  .tg-btn { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--gold); color: var(--gold); padding: 12px 24px; font-size: 14px; letter-spacing: 0.04em; text-decoration: none; margin-top: 32px; transition: all 0.2s; }
+  .tg-btn:hover { background: var(--gold); color: var(--navy); }
+  .tg-btn svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+  footer { background: #080E1C; padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.05); }
+  .footer-logo { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 18px; }
+  .footer-logo span { color: rgba(255,255,255,0.4); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">IFT <span>| Cross-Border Finance</span></a>
+  <div class="nav-links">
+    <a href="#services">Направления</a>
+    <a href="#geography">Юрисдикции</a>
+    <a href="#why">О компании</a>
+    <a href="#contact">Контакты</a>
+  </div>
+  <a href="#contact" class="nav-cta">Связаться</a>
+</nav>
+
+<div id="hero" class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Международные финансы и трансграничные расчёты</div>
+    <h1>Управление капиталом<br>в <em>глобальной</em><br>финансовой среде</h1>
+    <p class="hero-sub">IFT | Cross-Border Finance — независимый финансовый советник по международным платёжным операциям. Структурирование расчётов, казначейство и операционная инфраструктура для корпоративных клиентов.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Наши решения</a>
+      <a href="#why" class="btn-secondary">О компании</a>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">$14M+</span><span class="stat-label">расчётов в год</span></div>
+  <div class="stat-item"><span class="stat-num">2–3×</span><span class="stat-label">ускорение платежей</span></div>
+  <div class="stat-item"><span class="stat-num">4+</span><span class="stat-label">юрисдикции</span></div>
+  <div class="stat-item"><span class="stat-num">50+</span><span class="stat-label">корпоративных клиентов</span></div>
+</div>
+
+<section id="services" class="services-bg">
+  <div class="section-inner">
+    <p class="section-tag">Направления работы</p>
+    <h2 class="section-title">Финансовые решения<br>полного цикла</h2>
+    <p class="section-sub">Комплексный подход к управлению платёжной инфраструктурой в условиях меняющейся регуляторной среды.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-num">01</div><div class="service-title">Международные расчёты</div><p class="service-text">Трансграничные платёжные потоки через банки-корреспонденты и платёжных агентов. SWIFT, SEPA, альтернативные каналы. Юрисдикции: ОАЭ, Европа, Азия, СНГ.</p></div>
+      <div class="service-card"><div class="service-num">02</div><div class="service-title">Казначейство и ликвидность</div><p class="service-text">Управление мультивалютными денежными потоками, платёжными календарями и кассовыми позициями. USD, EUR, AED, CNY.</p></div>
+      <div class="service-card"><div class="service-num">03</div><div class="service-title">Структурирование ВЭД</div><p class="service-text">Сопровождение внешнеэкономических сделок end-to-end: финансовая модель расчётов, платёжная инфраструктура, валютный контроль.</p></div>
+      <div class="service-card"><div class="service-num">04</div><div class="service-title">Комплаенс и KYC</div><p class="service-text">Операционный комплаенс-контур: KYC контрагентов, AML-мониторинг, документальные требования, взаимодействие с банками.</p></div>
+      <div class="service-card"><div class="service-num">05</div><div class="service-title">Корреспондентские отношения</div><p class="service-text">Выстраивание и сопровождение корреспондентской сети: переговоры с банками, операционные SLA, резервирование маршрутов.</p></div>
+      <div class="service-card"><div class="service-num">06</div><div class="service-title">PSP и платёжные агенты</div><p class="service-text">Подбор и подключение PSP-провайдеров и платёжных агентов. Диверсификация маршрутов, снижение транзакционных издержек.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why-bg">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div>
+        <p class="section-tag">Почему IFT</p>
+        <h2 class="section-title light">Операционная надёжность<br>в любой среде</h2>
+        <p class="section-sub light">Работаем там, где стандартные инструменты не работают. Обеспечиваем непрерывность расчётов при любых ограничениях.</p>
+        <ul class="why-list">
+          <li><div class="why-icon"><svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg></div><div><div class="why-item-title">Непрерывность расчётов</div><div class="why-item-text">Резервирование маршрутов и инструментов. Сроки платежей сокращены в 2–3 раза.</div></div></li>
+          <li><div class="why-icon"><svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg></div><div><div class="why-item-title">Мультиюрисдикционность</div><div class="why-item-text">Одновременная работа в ОАЭ, Европе, Азии и СНГ без потери операционной скорости.</div></div></li>
+          <li><div class="why-icon"><svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg></div><div><div class="why-item-title">Комплаенс-прозрачность</div><div class="why-item-text">Полный KYC/AML-контур, соответствие требованиям валютного регулирования во всех юрисдикциях.</div></div></li>
+          <li><div class="why-icon"><svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"/></svg></div><div><div class="why-item-title">Финансовая дисциплина</div><div class="why-item-text">Управленческая отчётность, KPI операций, контроль маржинальности и операционных затрат.</div></div></li>
+        </ul>
+      </div>
+      <div class="why-visual">
+        <span class="why-visual-num">$14M</span>
+        <div class="why-visual-label">объём расчётов в год</div>
+        <div class="why-visual-line"></div>
+        <span class="why-visual-num" style="font-size:56px;">2–3×</span>
+        <div class="why-visual-label">ускорение платежей</div>
+        <div class="why-visual-line"></div>
+        <span class="why-visual-num" style="font-size:56px;">0</span>
+        <div class="why-visual-label">критических сбоев</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="geography" class="geo-bg">
+  <div class="section-inner">
+    <p class="section-tag">География присутствия</p>
+    <h2 class="section-title">Ключевые юрисдикции</h2>
+    <p class="section-sub">Операционное присутствие в финансовых центрах с выходом на банковскую инфраструктуру каждого региона.</p>
+    <div class="geo-grid">
+      <div class="geo-card"><span class="geo-flag">🇦🇪</span><div class="geo-name">ОАЭ</div><p class="geo-desc">Дубай и Абу-Даби. Банковская инфраструктура DIFC, расчёты в AED и USD, выход на азиатские рынки.</p></div>
+      <div class="geo-card"><span class="geo-flag">🇪🇺</span><div class="geo-name">Европа</div><p class="geo-desc">SEPA-зона. Корреспондентские счета в EUR. Регуляторная рамка ЕС, комплаенс высокого стандарта.</p></div>
+      <div class="geo-card"><span class="geo-flag">🇭🇰</span><div class="geo-name">Азия</div><p class="geo-desc">Гонконг, операции в CNY и HKD. Доступ к азиатской банковской инфраструктуре и торговым партнёрам.</p></div>
+      <div class="geo-card"><span class="geo-flag">🇷🇺</span><div class="geo-name">СНГ</div><p class="geo-desc">Россия и страны СНГ. Расчёты в RUB, взаимодействие с локальными банками и платёжными агентами.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-bg">
+  <div class="cta-inner">
+    <p class="section-tag" style="text-align:center;">Начать сотрудничество</p>
+    <h2 class="cta-title">Готовы обсудить вашу задачу?</h2>
+    <p class="cta-sub">Расскажите о задаче — предложим структуру и маршруты решения. Первая консультация без обязательств.</p>
+    <div class="contact-grid">
+      <div>
+        <form id="contact-form" action="https://formspree.io/f/xkoqqjye" method="POST">
+          <div class="form-group"><label>Ваше имя</label><input type="text" name="name" placeholder="Иван Иванов" required></div>
+          <div class="form-group"><label>Email или телефон</label><input type="text" name="contact" placeholder="email@company.com" required></div>
+          <div class="form-group"><label>Компания</label><input type="text" name="company" placeholder="Название компании"></div>
+          <div class="form-group"><label>Задача</label><textarea name="message" placeholder="Опишите кратко вашу задачу..."></textarea></div>
+          <button type="submit" class="form-submit">Отправить заявку</button>
+          <div class="form-success" id="form-success">Заявка отправлена. Свяжемся с вами в течение 24 часов.</div>
+        </form>
+      </div>
+      <div class="contact-info">
+        <div class="contact-info-item"><div class="contact-info-label">Email</div><a href="/cdn-cgi/l/email-protection#2d494c43034a484e59425f6d544c43494855034e4240" class="contact-info-val"><span class="__cf_email__" data-cfemail="a3c7c2cd8dc4c6c0d7ccd1e3dac2cdc7c6db8dc0ccce">[email&#160;protected]</span></a></div>
+        <div class="contact-info-item"><div class="contact-info-label">Телефон</div><a href="tel:+79852400198" class="contact-info-val">+7 (985) 240-01-98</a></div>
+        <div class="contact-info-item"><div class="contact-info-label">Режим работы</div><span class="contact-info-val" style="color:rgba(255,255,255,0.5);font-size:14px;">Пн–Пт, 9:00–19:00 МСК</span></div>
+        <a href="https://t.me/ift_global" target="_blank" class="tg-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.26l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.299z"/></svg>
+          Написать в Telegram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">IFT <span>| Cross-Border Finance © 2025</span></div>
+  <div class="footer-copy">Все права защищены. Конфиденциальность гарантирована.</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application
