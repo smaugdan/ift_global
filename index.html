@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IFT | Cross-Border Finance</title>
 <meta name="description" content="IFT Cross-Border Finance — независимый финансовый советник по международным платёжным операциям.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -105,11 +107,11 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600; font-size: 1rem; letter-spacing: -0.01em;
 }
 .logo-mark {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--gradient-accent);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-weight: 700; font-size: 0.7rem;
-  color: #fff; letter-spacing: 0.04em;
+  width: 36px; height: 36px; border-radius: 8px;
+  overflow: hidden; flex-shrink: 0;
+}
+.logo-mark img {
+  width: 100%; height: 100%; object-fit: cover;
 }
 .logo span { color: var(--text-muted); font-weight: 400; }
 
@@ -624,7 +626,7 @@ a { color: inherit; text-decoration: none; }
 <header class="header" id="header">
   <div class="header-inner">
     <a href="#" class="logo">
-      <div class="logo-mark">IFT</div>
+      <div class="logo-mark"><img src="logo-64.png" alt="IFT"></div>
       Cross-Border Finance
     </a>
     <nav class="nav">
@@ -994,4 +996,3 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 </body>
 </html>
-
